@@ -3,3 +3,5 @@ https://wordpress.org/documentation/article/hosting-wordpress/
 
 https://www.youtube.com/watch?v=hEXBgQ71rvE
 https://www.youtube.com/watch?v=3jQnrBLE-SY
+
+https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Nginx-PHP-FPM-config-example
