@@ -5,3 +5,11 @@ https://www.youtube.com/watch?v=hEXBgQ71rvE
 https://www.youtube.com/watch?v=3jQnrBLE-SY
 
 https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Nginx-PHP-FPM-config-example
+
+https://www.linuxbabe.com/ubuntu/install-wordpress-ubuntu-20-04-nginx-mariadb-php7-4-lemp
+
+#GOOD FOR DB
+https://netshopisp.medium.com/how-to-install-wordpress-on-centos-7-with-mariadb-10-nginx-and-php-fpm-7-8e79c481fd2d
+#CLI
+https://code.tutsplus.com/download-and-install-wordpress-via-the-shell-over-ssh--wp-24403a
+https://wp-cli.org/es/
