@@ -4,12 +4,5 @@ RUN apt -y update && apt -y install nginx
 COPY ./page /var/www/page
 EXPOSE 443
 EXPOSE 80
-COPY nginx.conf /etc/nginx/sites-available/default 
-COPY page.php /var/www/html/page.php
-COPY files/default /etc/nginx/sites-available/default 
-
-RUN chmod -R 777 /var/www/html
 #ENTRYPOINT /usr/sbin/nginx start
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
-
-

@@ -1,11 +1,24 @@
 services:
-  mariadb:
-    build: srcs/requirements/mariadb/
-    ports:
-      - "2121:3306"
+#  mariadb:
+#    build: srcs/requirements/mariadb/
+#    ports:
+#      - "2121:3306"
+#    volume: 
+#      - ./share:/world
+
   nginx:
-    build: srcs/requirements/nginx/
+    build: srcs/requirements/nginx
     ports:
       - "4242:80"
-  nginx2:
-    build: srcs/requirements/nginx
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /world
+  wordpress:
+    build: srcs/requirements/wordpress
+    ports:
+      - "9999:9000"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /world
