@@ -1,3 +1,4 @@
+### MARIADB ###
 FROM debian
 #RUN apt update && apt install -y vim curl systemctl
 RUN apt update && apt install -y curl
@@ -6,9 +7,16 @@ RUN apt install -y mariadb-server
 RUN apt install -y vim mariadb-client #TODO delete
 #CMD ["/etc/init.d/mariadb", "start"]
 #CMD ["mysqld", "start"]
-#php
-RUN apt install -y php-fpm/stable
 
+RUN <<EOF
+/etc/init.d/mariadb start
+mariadb --execute "create database wordpress;"
+mariadb --execute "grant all privileges on wordpress.* to uwordpress@localhost identified by 'securePass'"
+mariadb --execute "flush privileges"
+EOF
+
+### PHP ###
+RUN apt install -y php-fpm/stable php-mysql
 COPY init.sh /bin/init.sh
 RUN mkdir -p  /var/www/html
 COPY page.php /var/www/html/page.php
@@ -17,3 +25,16 @@ COPY files/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 RUN chmod 777 /bin/init.sh
 RUN echo $PATH
 CMD ["/bin/init.sh"]
+
+### WORDPRESS ###
+
+RUN apt update && apt install unzip wget
+#RUN mkdir -p /usr/share/nginx
+WORKDIR /var/www/html
+RUN wget https://wordpress.org/latest.zip
+RUN unzip latest.zip 
+COPY wp-config.php /var/www/html/wordpress
+run chmod -R 777 /var/www
+#RUN mv /usr/share/nginx/wordpress /usr/share/nginx/example.com
+
+
