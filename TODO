@@ -1,4 +1,5 @@
 //TODO
+!!! usar bulseye
 modificar root php
 evitar chequeig de fitxer de nginx
 la contrasenya de la base de dades no esta en environmet variables
