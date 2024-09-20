@@ -16,6 +16,9 @@ services:
       - type: bind
         source: ./shared
         target: /world
+        #source: ./srcs/requirements/wordpress/webpage
+        #target: /var/www/html
+
   wordpress:
     build: srcs/requirements/wordpress
     ports:
@@ -24,3 +27,5 @@ services:
       - type: bind
         source: ./shared
         target: /world
+        #source: ./srcs/requirements/wordpress/webpage
+        #target: /var/www/html
