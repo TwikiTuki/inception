@@ -42,6 +42,8 @@ run chmod -R 777 /var/www
 #RUN mv /usr/share/nginx/wordpress /usr/share/nginx/example.com
 
 RUN cp -r /var/www/html /sdafhtml
+RUN mkdir -p /run/php
+CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
+#CMD ["/usr/sbin/php-fpm7.4"]
 #CMD ["service php7.4-fpm", "start"]
-CMD ["/bin/init.sh"]
-
+#CMD ["/bin/init.sh"]
