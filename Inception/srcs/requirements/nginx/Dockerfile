@@ -1,5 +1,5 @@
 ### NGinx ###
-FROM debian
+FROM debian:bullseye
 RUN apt -y update && apt -y install curl vim
 RUN apt -y update && apt -y install nginx 
 COPY ./page /var/www/page
@@ -24,6 +24,9 @@ RUN unzip latest.zip
 RUN mv wordpress html
 RUN chmod -R 777 /var/www/html
 RUN touch /var/www/html/wp-config.php
+
+RUN groupadd --gid 995 hosttwikituki
+RUN adduser www-data hosttwikituki
 
 RUN echo "hewllow from nginx" > /var/www/html/index.html
 RUN echo "hewllow wordpress from nginx" > /var/www/html/index.html

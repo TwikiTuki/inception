@@ -14,10 +14,10 @@ services:
       - "4242:80"
     volumes:
       - type: bind
-        source: ./shared
-        target: /world
-        #source: ./srcs/requirements/wordpress/webpage
-        #target: /var/www/html
+        #source: ./shared
+        #target: /world
+        source: ./srcs/requirements/wordpress/webpage
+        target: /var/www/html
 
   wordpress:
     build: srcs/requirements/wordpress
@@ -25,7 +25,7 @@ services:
       - "9999:9000"
     volumes:
       - type: bind
-        source: ./shared
-        target: /world
-        #source: ./srcs/requirements/wordpress/webpage
-        #target: /var/www/html
+        #source: ./shared
+        #target: /world
+        source: ./srcs/requirements/wordpress/webpage
+        target: /var/www/html

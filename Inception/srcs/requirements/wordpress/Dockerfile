@@ -41,6 +41,9 @@ COPY wp-config.php /var/www/html/wordpress
 run chmod -R 777 /var/www
 #RUN mv /usr/share/nginx/wordpress /usr/share/nginx/example.com
 
+RUN groupadd --gid 995 hosttwikituki
+RUN adduser www-data hosttwikituki
+
 RUN cp -r /var/www/html /sdafhtml
 RUN mkdir -p /run/php
 CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
