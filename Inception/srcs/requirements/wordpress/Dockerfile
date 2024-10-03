@@ -1,52 +1,42 @@
 ### WORDPRESS ###
 FROM debian:bullseye
-
-### MARIADB ###
-##RUN apt update && apt install -y vim curl systemctl
-#RUN apt update && apt install -y curl
-#RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
-#RUN apt install -y mariadb-server
-#RUN apt install -y vim mariadb-client #TODO delete
-##CMD ["/etc/init.d/mariadb", "start"]
-##CMD ["mysqld", "start"]
-
-#RUN <<EOF
-#/etc/init.d/mariadb start
-#mariadb --execute "create database wordpress;"
-#mariadb --execute "grant all privileges on wordpress.* to uwordpress@localhost identified by 'securePass';"
-#mariadb --execute "flush privileges"
-#EOF
-
 ### PHP ###
 RUN apt update && apt install -y php-fpm php-mysql
-#RUN apt-get update && apt-get install -y php-fpm
-COPY init.sh /bin/init.sh
 RUN mkdir -p  /var/www/html
-COPY page.php /var/www/html/page.php
-RUN chmod -R 777 /var/www
 #COPY files/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY files/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-RUN chmod 777 /bin/init.sh
-RUN echo $PATH
 
+RUN groupadd --gid 995 hostvboxsf
+RUN adduser www-data hostvboxsf
+RUN groupadd --gid 1000 hosttwikituki
+RUN adduser www-data hosttwikituki
+
+RUN mkdir -p /run/php
+
+WORKDIR /usr/sbin/
+RUN apt update && apt install -y curl
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN cp wp-cli.phar wp
+RUN chmod +x wp
+
+WORKDIR /var/www/html
+COPY ./tools/ /run/tools
+#CMD ["tail", "-f"]
+CMD ["/run/tools/init.sh"]
 
 ### WORDPRESS ###
 
-RUN apt update && apt -y install unzip wget
-#RUN mkdir -p /usr/share/nginx
-WORKDIR /var/www/html
-RUN wget https://wordpress.org/latest.zip
-RUN unzip latest.zip 
-COPY wp-config.php /var/www/html/wordpress
-run chmod -R 777 /var/www
-#RUN mv /usr/share/nginx/wordpress /usr/share/nginx/example.com
-
-RUN groupadd --gid 995 hosttwikituki
-RUN adduser www-data hosttwikituki
-
-RUN cp -r /var/www/html /sdafhtml
-RUN mkdir -p /run/php
-CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
-#CMD ["/usr/sbin/php-fpm7.4"]
-#CMD ["service php7.4-fpm", "start"]
-#CMD ["/bin/init.sh"]
+#RUN apt update && apt -y install unzip wget
+##RUN mkdir -p /usr/share/nginx
+#WORKDIR /var/www/html
+#RUN wget https://wordpress.org/latest.zip
+#RUN unzip latest.zip 
+#COPY wp-config.php /var/www/html/wordpress
+#run chmod -R 777 /var/www
+##RUN mv /usr/share/nginx/wordpress /usr/share/nginx/example.com
+#
+#
+#CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
+##CMD ["/usr/sbin/php-fpm7.4"]
+##CMD ["service php7.4-fpm", "start"]
+##CMD ["/bin/init.sh"]

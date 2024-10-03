@@ -16,7 +16,7 @@ services:
       - type: bind
         #source: ./shared
         #target: /world
-        source: ./srcs/requirements/wordpress/webpage
+        source: /home/jrenau-v/data/webpage
         target: /var/www/html
 
   wordpress:
@@ -27,5 +27,5 @@ services:
       - type: bind
         #source: ./shared
         #target: /world
-        source: ./srcs/requirements/wordpress/webpage
+        source: /home/jrenau-v/data/webpage
         target: /var/www/html

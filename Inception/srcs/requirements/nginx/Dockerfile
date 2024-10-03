@@ -5,28 +5,14 @@ RUN apt -y update && apt -y install nginx
 COPY ./page /var/www/page
 EXPOSE 443
 EXPOSE 80
-COPY nginx.conf /etc/nginx/sites-available/default 
-COPY page.php /var/www/html/page.php
-COPY files/default /etc/nginx/sites-available/default 
-
-RUN chmod -R 777 /var/www/html
-
-#ENTRYPOINT /usr/sbin/nginx start
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
-
-#TODELETE
-WORKDIR /var/www/
-RUN rm -rf html
-COPY page.php /var/www/html/page.php
-RUN apt install wget unzip
-RUN wget https://wordpress.org/latest.zip
-RUN unzip latest.zip
-RUN mv wordpress html
-RUN chmod -R 777 /var/www/html
-RUN touch /var/www/html/wp-config.php
-
-RUN groupadd --gid 995 hosttwikituki
+#COPY nginx.conf /etc/nginx/sites-available/default 
+COPY tools/default /etc/nginx/sites-available/default 
+RUN groupadd --gid 995 hostvboxsf
+RUN adduser www-data hostvboxsf
+RUN groupadd --gid 1000 hosttwikituki
 RUN adduser www-data hosttwikituki
+RUN mkdir -p /etc/ssl/private
+RUN openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/localhost.key -out /etc/ssl/certs/localhost.crt -days 365 -nodes -subj "/C=SP/ST=Cat/L=Cat/O=twk/OU=v/CN=nginx"
 
-RUN echo "hewllow from nginx" > /var/www/html/index.html
-RUN echo "hewllow wordpress from nginx" > /var/www/html/index.html
+WORKDIR /var/www/html
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
