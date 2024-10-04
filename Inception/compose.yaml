@@ -10,6 +10,8 @@ services:
 
   nginx:
     build: srcs/requirements/nginx
+    depends_on:
+      - wordpress
     ports:
       - "4242:80"
     volumes:
@@ -21,6 +23,8 @@ services:
 
   wordpress:
     build: srcs/requirements/wordpress
+    depends_on:
+      - mariadb
     ports:
       - "9999:9000"
     volumes:
