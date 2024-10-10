@@ -13,6 +13,7 @@ mariadb --execute "flush privileges"
 EOF
 
 USER mysql
+#CMD ["mariadbd", "user=root"]
 CMD ["mariadbd"]
 COPY ./files/mariadb.cnf /etc/mysql/mariadb.cnf 
 

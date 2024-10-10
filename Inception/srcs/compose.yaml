@@ -1,35 +1,35 @@
 services:
   mariadb:
-    build: srcs/requirements/mariadb/
+    build: requirements/mariadb/
     ports:
       - "2121:3306"
     volumes: 
       - type: bind
-        source: ./shared
+        source: ../shared
         target: /world
 
   nginx:
-    build: srcs/requirements/nginx
+    build: requirements/nginx
     depends_on:
       - wordpress
     ports:
       - "443:443"
     volumes:
       - type: bind
-        #source: ./shared
+        #source: ../shared
         #target: /world
         source: /home/jrenau-v/data/webpage
         target: /var/www/html
 
   wordpress:
-    build: srcs/requirements/wordpress
+    build: requirements/wordpress
     depends_on:
       - mariadb
     ports:
       - "9999:9000"
     volumes:
       - type: bind
-        #source: ./shared
+        #source: ../shared
         #target: /world
         source: /home/jrenau-v/data/webpage
         target: /var/www/html
