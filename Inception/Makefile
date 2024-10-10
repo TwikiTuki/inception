@@ -3,17 +3,17 @@
 	#@mkdir -p /home/jrenau-v/data/database
 	#@chmod 777 /home/jrenau-v/data/webpage
 	#@chmod 777 /home/jrenau-v/data/database
-	@mkdir -p $@
-	@chmod 777 $@
+	mkdir -p $@
+	chmod 777 $@
 upp: /home/jrenau-v/data/webpage /home/jrenau-v/data/database
-	@docker compose -f ./srcs/compose.yaml up
+	docker compose -f ./srcs/compose.yaml up
 bld:
-	@docker compose -f ./srcs/compose.yaml build
+	docker compose -f ./srcs/compose.yaml build
 dwn:
 	docker compose -f ./srcs/compose.yaml down
 fdwn: dwn
-	@rm -rf /home/jrenau-v/data/webpage
-	@rm -rf /home/jrenau-v/data/database
+	rm -rf /home/jrenau-v/data/webpage
+	rm -rf /home/jrenau-v/data/database
 
 re: fdwn bld upp
 

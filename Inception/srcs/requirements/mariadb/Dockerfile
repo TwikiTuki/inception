@@ -5,14 +5,19 @@ RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 RUN apt install -y mariadb-server
 RUN apt install -y vim mariadb-client
 
+RUN echo sdaf
+RUN mkdir /run/mysqld/
+RUN chmod -R 777 /run/mysqld/
+RUN chmod -R 777 /var/lib/mysql/
+USER mysql
 RUN <<EOF
 /etc/init.d/mariadb start
 mariadb --execute "create database wordpress;"
 mariadb --execute "grant all privileges on wordpress.* to uwordpress identified by 'securePass';"
 mariadb --execute "flush privileges"
 EOF
+RUN echo fkkk
 
-USER mysql
 #CMD ["mariadbd", "user=root"]
 CMD ["mariadbd"]
 COPY ./files/mariadb.cnf /etc/mysql/mariadb.cnf 
