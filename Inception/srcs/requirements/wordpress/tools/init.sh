@@ -1,5 +1,6 @@
 #! /bin/bash
 #https://make.wordpress.org/cli/handbook/how-to/how-to-install/
+sleep 10
 wp core download --allow-root --path=wordpress
 cd wordpress
 wp config create --allow-root --dbname=wordpress --dbuser=uwordpress --dbhost=mariadb --dbpass=securePass --prompt=securePass
