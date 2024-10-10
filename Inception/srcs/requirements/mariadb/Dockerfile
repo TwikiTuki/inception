@@ -14,6 +14,7 @@ RUN chmod -R 777 /etc/mysql/mariadb.cnf
 
 RUN chmod -R 777 /run/mysqld/
 RUN chmod -R 777 /var/lib/mysql/
+RUN cp -r /var/lib/mysql /sdaf
 USER mysql
 #RUN <<EOF
 #/etc/init.d/mariadb start

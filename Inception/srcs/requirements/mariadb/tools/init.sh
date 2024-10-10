@@ -1,6 +1,8 @@
 #!/bin/bash
 
 /etc/init.d/mariadb start
+chown mysql:mysql /var/lib/mysql
+cp -r /sdaf /var/lib/mysql
 mariadb --execute "create database wordpress;"
 mariadb --execute "grant all privileges on wordpress.* to uwordpress identified by 'securePass';"
 mariadb --execute "flush privileges"

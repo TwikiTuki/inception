@@ -3,10 +3,13 @@ services:
     build: requirements/mariadb/
     ports:
       - "2121:3306"
+    user: mysql:mysql
     volumes: 
       - type: bind
         source: ../shared
         target: /world
+        #source: /home/jrenau-v/data/database
+        #target: /var/lib/mysql
 
   nginx:
     build: requirements/nginx
