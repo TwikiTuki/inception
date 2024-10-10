@@ -1,9 +1,11 @@
 services:
   mariadb:
     build: requirements/mariadb/
+    env_file: .env
+    container_name: mariadb
+    user: mysql:mysql
     ports:
       - "2121:3306"
-    user: mysql:mysql
     volumes: 
       - type: bind
         source: ../shared
@@ -13,6 +15,8 @@ services:
 
   nginx:
     build: requirements/nginx
+    env_file: .env
+    container_name: nginx
     depends_on:
       - wordpress
     ports:
@@ -26,6 +30,8 @@ services:
 
   wordpress:
     build: requirements/wordpress
+    env_file: .env
+    container_name: wordpress
     depends_on:
       - mariadb
     ports:

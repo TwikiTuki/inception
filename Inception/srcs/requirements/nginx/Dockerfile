@@ -3,7 +3,7 @@ FROM debian:bullseye
 RUN apt -y update && apt -y install curl vim
 RUN apt -y update && apt -y install nginx 
 EXPOSE 443
-EXPOSE 80
+#EXPOSE 80
 COPY tools/default /etc/nginx/sites-available/default 
 RUN groupadd --gid 1000 hosttwikituki
 RUN adduser www-data hosttwikituki
