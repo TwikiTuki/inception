@@ -12,6 +12,7 @@ bld:
 dwn:
 	docker compose -f ./srcs/compose.yaml down
 fdwn: dwn
+	docker compose -f ./srcs/compose.yaml down --volumes
 	rm -rf /home/jrenau-v/data/webpage
 	rm -rf /home/jrenau-v/data/database
 

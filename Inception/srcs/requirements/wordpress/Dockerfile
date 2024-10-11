@@ -15,6 +15,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN cp wp-cli.phar wp
 RUN chmod +x wp
 
+RUN mkdir /world/
 WORKDIR /var/www/html
 COPY ./tools/ /run/tools
 CMD ["/run/tools/init.sh"]

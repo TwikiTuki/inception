@@ -6,12 +6,16 @@ services:
     user: mysql:mysql
     ports:
       - "2121:3306"
-    volumes: 
-      - type: bind
-        source: ../shared
-        target: /world
-        #source: /home/jrenau-v/data/database
-        #target: /var/lib/mysql
+    volumes:
+#      - mariadb_vol:/world
+      - mariadb_vol:/var/lib/mysql/
+#   volumes: 
+#       - mariadb_vol:/world/
+#      - type: bind
+#        source: ../shared
+#        target: /world
+#        #source: /home/jrenau-v/data/database
+#        #target: /var/lib/mysql
 
   nginx:
     build: requirements/nginx
@@ -23,8 +27,6 @@ services:
       - "443:443"
     volumes:
       - type: bind
-        #source: ../shared
-        #target: /world
         source: /home/jrenau-v/data/webpage
         target: /var/www/html
 
@@ -34,11 +36,16 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    ports:
-      - "9999:9000"
     volumes:
       - type: bind
-        #source: ../shared
-        #target: /world
         source: /home/jrenau-v/data/webpage
         target: /var/www/html
+
+volumes:
+  mariadb_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jrenau-v/data/database
+      o: bind
+
