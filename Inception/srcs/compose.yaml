@@ -6,9 +6,9 @@ services:
     user: mysql:mysql
     ports:
       - "2121:3306"
-    volumes:
+#    volumes:
 #      - mariadb_vol:/world
-      - mariadb_vol:/var/lib/mysql/
+#      - mariadb_vol:/var/lib/mysql/
 #   volumes: 
 #       - mariadb_vol:/world/
 #      - type: bind
