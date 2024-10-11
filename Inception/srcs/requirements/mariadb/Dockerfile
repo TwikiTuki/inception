@@ -26,8 +26,8 @@ USER mysql
 
 #CMD ["mariadbd", "user=root"]
 #CMD ["mariadbd"]
+COPY ./tools/mariadb.cnf /etc/mysql/mariadb.cnf 
 CMD ["/run/tools/init.sh"]
-COPY ./files/mariadb.cnf /etc/mysql/mariadb.cnf 
 
 #CMD ["/bin/bash"]
 #CMD ["mariadb", "use=root", "start"]
