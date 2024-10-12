@@ -1,12 +1,8 @@
 /home/jrenau-v/data/%:
-	#@mkdir -p /home/jrenau-v/data/webpage
-	#@mkdir -p /home/jrenau-v/data/database
-	#@chmod 777 /home/jrenau-v/data/webpage
-	#@chmod 777 /home/jrenau-v/data/database
 	mkdir -p $@
 	chmod 777 $@
 upp: /home/jrenau-v/data/webpage /home/jrenau-v/data/database
-	docker compose -f ./srcs/compose.yaml up
+	docker compose -f ./srcs/compose.yaml up || true
 bld:
 	docker compose -f ./srcs/compose.yaml build
 dwn:
@@ -19,7 +15,7 @@ fdwn: dwn
 re: fdwn bld upp
 
 clean: dwn
-	@docker compose prune -a
+	docker system prune -a
 fclean: fdwn clean
 
 .PHONY: all upp bld dwn fdwn clean fclean
